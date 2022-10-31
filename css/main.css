@@ -1,0 +1,167 @@
+*,*::before, *::after {box-sizing: border-box;}
+
+html, body{
+    margin: 0;
+    height: 100%;
+}
+
+body{
+    background-color: #1e1f23;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animation */
+.power-switch 
+{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    cursor: pointer;
+}
+.power-switch input
+{
+    position: absolute;
+    width: 0;
+    height: 0;   
+}
+.power-switch .button
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.power-switch .button::after
+{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle closest-side, rgba(255, 255, 255, .2), transparent);
+    filter: blur(70px);
+    transition: .5s ease-in-out;
+    opacity: 0;
+}
+.power-switch  input:checked ~ .button::after
+{
+    opacity: 1;
+}
+/* Animation - Off */
+.power-switch .button .power-off
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    transition: .1s;
+}
+.power-switch .button .power-off line
+{
+    stroke-width: 10;
+    stroke: #fff;
+    stroke-linecap: round;
+    transform:translateY(20px);
+    opacity: .2;
+    transition: .5s ease-in-out;
+}
+.power-switch input:checked ~ .button .power-off line
+{
+    transform: translateY(20px);
+    animation: line .5s ease-in-out;
+}
+@keyframes line{    
+    0%{
+        transform: translateY(20px);
+    }
+    20%{
+        transform: translateY(40px);
+    }
+    40%{
+        transform: translateY(-20px);
+    }
+    60%{
+        transform: translateY(-20px);
+    }
+    80%{
+        transform: translateY(-30px);
+    }
+    100%{
+        transform: translateY(20px);
+    }
+}
+.power-switch .button .power-off circle
+{
+    stroke-width: 10;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-dasharray: 468;
+    stroke-dashoffset: 68;
+    transform-origin: center;
+    transform: rotate(-63deg);
+    opacity: .2;
+}
+/* Animation - On */
+.power-switch .button .power-on
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    transition:  .1s;
+}
+.power-switch .button .power-on line
+{
+    stroke-width: 10;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-dasharray: 50;
+    stroke-dashoffset: -50;
+    transform: translateY(20px);
+    opacity: 2;
+    transition: .5 ease-in-out;
+}
+.power-switch input:checked ~ .button .power-on line
+{
+    opacity: 1;
+    stroke-dashoffset: 0;
+    filter: drop-shadow( 0 0 10px #fff);
+    transform: translateY(20px);
+    animation: line .5s ease-in-out;
+}
+.power-switch .button .power-on circle
+{
+    stroke-width: 10;
+    stroke: #fff;
+    stroke-linecap: round;
+    stroke-dasharray: 468;
+    stroke-dashoffset: 468;
+    transform-origin: center;
+    transform: rotate(-423deg);
+    opacity: 0;
+    transition: .2s ease-in-out;
+}
+.power-switch input:checked ~ .button .power-on circle
+{
+    opacity: 1;
+    stroke-dashoffset: 68;
+    transform: rotate(-63deg);
+    filter: drop-shadow( 0 0 10px #fff);
+}
+.power-switch input:checked ~ .button .power-off,
+.power-switch input:checked  .button .power-on
+{
+    transform: scale(1);
+    animation: click-button .1s ease-in-out;
+}
+@keyframes click-button{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(.9);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
